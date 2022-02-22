@@ -1,0 +1,112 @@
+ <div class="bg-primary mt-2">
+  <div class="float-left">
+    <small class="display-4 text-white p-2"> <i class="fa fa-user"> User Details </i></small>
+  </div>
+  <div class="float-right p-2">
+  <button type="button" class="btn btn-warning rounded-0" data-bs-toggle="modal" data-bs-target="#userModal">
+    Add new user 
+  </button>
+  </div>
+  </div>
+
+  
+  <table class="table table-striped table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">City</th>
+          <th scope="col">Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userDetail of userDetails; index as i">
+  
+          <th scope="row" >{{i+1}}</th>
+          <td>
+            <div *ngIf="!userDetail.isEdit">
+              {{userDetail.name}}
+            </div>
+            <div *ngIf="userDetail.isEdit">
+              <input type="text" class="form-control rounded-0"  [value]=[userDetail.name]/>
+            </div>
+          </td>
+  
+          <td>
+            <div *ngIf="!userDetail.isEdit">
+              {{userDetail.email}}
+            </div>
+            <div *ngIf="userDetail.isEdit">
+              <input type="text" class="form-control rounded-0" [value]=[userDetail.email]/>
+            </div>
+          </td>
+  
+          <td>
+            <!-- <div *ngIf="!userDetail.isEdit">
+              {{userDetail.address.city}}
+            </div>
+            <div *ngIf="userDetail.isEdit">
+              <input type="text" class="form-control rounded-0" [value]=[userDetail.address.city]/>
+            </div>  -->
+            <select class="form-select"  >
+              <option *ngFor="let userDetail of userDetails" > {{userDetail.address.city}}</option>
+            </select>
+           
+            
+           
+          </td>
+
+        <td>
+          <div *ngIf="!userDetail.isEdit">
+            &nbsp; 
+            <i class="btn btn-sm btn-primary fa fa-edit rounded-0" (click)="edit(userDetail)"> </i>   &nbsp;
+            <i class="btn btn-sm btn-danger fa fa-trash rounded-0" (click)="deleteData(userDetail)"></i>
+          </div>
+          <div *ngIf="userDetail.isEdit">
+            &nbsp; 
+            <i class="btn btn-sm btn-success fa fa-save rounded-0" (click)="save(userDetail)"></i>   &nbsp;
+            <i class="btn btn-sm btn-warning fa fa-ban rounded-0" (click)="Cancle(userDetail)"></i>
+          </div>
+        </td>
+           
+        </tr>
+          
+      </tbody>
+  </table>
+
+<div class="modal fade rounded-0" id="userModal" tabindex="-10" aria-labelledby="userModallLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header card-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">User Registation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="user name" class="form-label">User Name</label>
+          <input type="text" class="form-control rounded-0"  placeholder="Enter user name">
+        </div>
+        <div class="mb-3">
+          <label for="user email" class="form-label">User email </label>
+          <input type="email" class="form-control rounded-0"  placeholder="Enter user email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password </label>
+          <input type="city" class="form-control rounded-0"  placeholder="Enter a password">
+        </div>
+        <div class="mb-3">
+          <label for="conformpassword" class="form-label">Conform password </label>
+          <input type="city" class="form-control rounded-0"  placeholder="Confirim  password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancle</button>
+        <button type="button" class="btn btn-primary rounded-0">Add User</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+

@@ -1,0 +1,196 @@
+<!-- <p class="text-priamry">basic-form works! </p> -->
+
+<!-- <div class="col-md-6">
+    <input type="text" class="form-control" [(ngModel)]="data">
+</div> -->
+
+<form #stdForm ="ngForm" (ngSubmit)="onSubmit(stdForm.value)"  class="m-3 p-3"> 
+    <h4>Student registration form</h4>
+    <div class="col-md-6 mb-2">
+        <label for="Student Name"> Enter Your Name</label>
+        <input type="text" class="form-control" #stdNameRef="ngModel" required minlength="6" placeholder="Enter your name" name="userName" ngModel>
+        <!-- <small class="text-priamry">{{stdNameRef.className}}</small> -->
+        <div *ngIf="stdNameRef.errors && (stdNameRef.touched || stdNameRef.dirty)" class="text-danger">
+            <small [hidden]="!stdNameRef.errors?.['required']">User is required</small>
+            <small [hidden]="!stdNameRef.errors?.['minlength']">USer name should have 6 char least </small>
+        </div>
+    </div>
+    <div class="col-md-6 mb-2">
+      <label for="Student Name"> Enter Your Email</label>
+      <input type="email" class="form-control" #stdEmailRef="ngModel" required minlength="8" placeholder="Enter your Email" name="Email" ngModel>
+      <!-- <small class="text-priamry">{{stdNameRef.className}}</small> -->
+      <div *ngIf="stdEmailRef.errors && (stdEmailRef.touched || stdEmailRef.dirty)" class="text-danger">
+          <small [hidden]="!stdEmailRef.errors?.['required']">Email is required</small>
+      </div>
+  </div>
+    <div class="col-md-6 mb-2">
+        <label for="Student Name"> Enter Your password</label>
+        <input type="password" class="form-control" #stdpasswordRef="ngModel" required minlength="8" placeholder="Enter your password" name="password" ngModel>
+        <!-- <small class="text-priamry">{{stdNameRef.className}}</small> -->
+        <div *ngIf="stdpasswordRef.errors && (stdpasswordRef.touched || stdpasswordRef.dirty)" class="text-danger">
+            <small [hidden]="!stdpasswordRef.errors?.['required']">Password is required</small>
+            <small [hidden]="!stdpasswordRef.errors?.['minlength']">Password name should have 8 char least </small>
+        </div>
+    </div>
+      <!-- <div class="col-md-6 mb-2">
+        <label for="Student ID"> Enter Your ID</label>
+        <input type="text" class="form-control" #stdIdRef="ngModel" placeholder="Enter your name" required pattern="^[1-9][0-9]{4}$" name="studentId" ngModel>
+        <div *ngIf="stdIdRef.errors && (stdIdRef.touched || stdIdRef.dirty)" class="text-danger">
+            <small [hidden]="!stdIdRef.errors?.['pattern']">Enter a 5 Digits Number only</small>
+            <small [hidden]="!stdIdRef.errors?.['required']">Student id is required</small>
+        </div>
+    </div> -->
+    <div class="col-md-6 mb-2">
+        <label for="Student Name"> Enter Your City</label>
+        <input type="text" class="form-control" #stdCityRef="ngModel" required  placeholder="Enter your City" name="studentCity" ngModel>
+        <!-- <small class="text-priamry">{{stdCityRef.classCity}}</small> -->
+        <div *ngIf="stdCityRef.errors && (stdCityRef.touched || stdCityRef.dirty)" class="text-danger">
+            <small [hidden]="!stdCityRef.errors?.['required']">City is required</small>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <label for="Student Name"> Enter Your DOB</label>
+      <input type="date" class="form-control" #dobRef="ngModel" required  placeholder="Enter your City" name="stdDob" ngModel>
+      <!-- <small class="text-priamry">{{stdCityRef.classCity}}</small> -->
+      <!-- <div *ngIf="stdCityRef.errors && (stdCityRef.touched || stdCityRef.dirty)" class="text-danger">
+          <small [hidden]="!stdCityRef.errors?.['required']">City is required</small>
+      </div> -->      
+  </div>
+
+  
+
+    
+    <div class="col-md-6 mb-3">
+        <input type="submit" class="btn  btn-primary" value="submit">
+    </div>
+</form>
+
+<!-- <input type="text" value={{dataref.value}} /> -->
+<!-- <input type="text" [(ngModel)]="name" /> -->
+<!-- <input type="text" [value]=dataref.value />
+<input type="text" #dataref ngModel /> -->
+
+<!-- <input type="text"  [(ngModel)]=dataref.value  />
+
+<input type="text" #dataref [(ngModel)]=dataref.value  /> -->
+
+
+<!-- <table class="table table-striped table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">City</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataUser of UserData; index as i">
+  
+        <th scope="row" >{{i+1}}</th>
+        <td>
+          <div *ngIf="!dataUser.isEdit">
+            {{dataUser.userName}}
+          </div>
+          <div *ngIf="dataUser.isEdit">
+            <input type="text" class="form-control rounded-0"  [value]=[dataUser.userName]/>
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!dataUser.isEdit">
+            {{dataUser.Email}}
+          </div>
+          <div *ngIf="dataUser.isEdit">
+            <input type="text" class="form-control rounded-0"  [value]=[dataUser.Email]/>
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!dataUser.isEdit">
+            {{dataUser.studentId}}
+          </div>
+          <div *ngIf="dataUser.isEdit">
+            <input type="text" class="form-control rounded-0" disabled [value]=[dataUser.studentId]/>
+          </div>
+        </td>
+        
+        <td>
+          <div *ngIf="!dataUser.isEdit">
+            {{dataUser.studentCity}}
+          </div>
+          <div *ngIf="dataUser.isEdit">
+            <input type="text" class="form-control rounded-0" [value]=[dataUser.studentCity]/>
+          </div>
+        </td>
+      <td>
+        <div *ngIf="!dataUser.isEdit">
+          &nbsp; 
+          <i class="btn btn-sm btn-primary fa fa-edit rounded-0" (click)="edit(dataUser)"> </i>   &nbsp;
+          <i class="btn btn-sm btn-danger fa fa-trash rounded-0" (click)="deleteData(dataUser)"></i>
+        </div>
+        <div *ngIf="dataUser.isEdit">
+          &nbsp; 
+          <i class="btn btn-sm btn-success fa fa-save rounded-0" (click)="save(dataUser)"></i>   &nbsp;
+          <i class="btn btn-sm btn-warning fa fa-ban rounded-0" (click)="Cancle(dataUser)"></i>
+        </div>
+      </td>
+         
+      </tr>
+        
+    </tbody>
+</table> -->
+
+
+<!-- <div class="container">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+        <div class="form-group col-md-6">
+            <label for="User name"></label>
+            <input type="text"  #nameRef="ngModel" required minlength="4" maxlength="8" class="form-control" placeholder="Enter Name" name="name" ngModel>
+            <div [hidden]="(nameRef.valid || nameRef.pristine)">
+                <small class="text-danger">Email is required</small>
+            </div>
+            <div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="text-danger">
+                <small [hidden]="!nameRef.errors?.['required']">Please Enter username</small>
+                <small [hidden]="!nameRef.errors?.['minlength']">Please Enter at leasrt 4 charactors </small>
+                <small [hidden]="!nameRef.errors?.['maxlength']">Please Enter maximum 8 charactors only </small>
+            </div>
+
+        </div> 
+
+        <div class="form-group col-md-6">
+            <label for="Student id"></label>
+            <input type="text"  #studentIdRef="ngModel" required  pattern="^[1-9][0-9]{4}$" class="form-control" placeholder="Enter Student id" name="studentId" ngModel>
+        </div>
+        <div *ngIf="studentIdRef.errors && (studentIdRef.dirty || studentIdRef.touched)" class="text-danger">
+            <small [hidden]="!studentIdRef.errors?.['pattern']">Enter Vlaid 5 digits student id only </small>
+            <small [hidden]="!studentIdRef.errors?.['required']">Please Student id</small>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="password"></label>
+            <input type="password" class="form-control" placeholder="Enter Password" name="password" ngModel>
+        </div>
+        <div class="form-group col-md-6" ngModelGroup="address">
+            <div class="from-group col-md-12">
+            <label for="city"></label>
+            <input type="city" class="form-control" placeholder="Enter city" name="city" ngModel>
+            </div>
+            <div class="from-group col-md-12">
+            <label for="sate"></label>
+            <input type="sate" class="form-control" placeholder="Enter sate" name="sate" ngModel>
+            </div>
+            <div class="from-group col-md-12">
+            <label for="zipcode"></label>
+            <input type="zipcode" class="form-control" placeholder="Enter zipcode" name="zipcode" ngModel>
+            </div>
+        </div>
+        <div class="form-group col-md mt-2">
+            <input type="submit" value="submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+ -->
